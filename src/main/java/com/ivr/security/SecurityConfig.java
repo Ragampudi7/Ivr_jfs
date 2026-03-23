@@ -16,7 +16,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/users/**", "/reminders/**", "/call/**", "/api/twiml/**", "/twiml/**", "/index.html", "/app.js", "/styles.css", "/static/**").permitAll()
+                        .requestMatchers("/", "/error", "/auth/**", "/users/**", "/reminders/**", "/call/**", "/api/twiml/**", "/twiml/**", "/index.html", "/app.js", "/styles.css", "/static/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
