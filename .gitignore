@@ -1,0 +1,12 @@
+# IDEs
+.idea/
+.settings/
+.vscode/
+
+# Build artifacts
+target/
+*.jar
+*.class
+
+# Environment Variables
+.env
