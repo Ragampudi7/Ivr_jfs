@@ -8,62 +8,16 @@
 	<link rel="stylesheet" href="styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<meta name="description" content="Manage elderly users and reminders - IVR system frontend">
+    
+    <!-- React & Babel CDNs -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body>
-	<header class="site-header">
-		<div class="container">
-			<h1>IVR Elderly Reminder</h1>
-			<p class="subtitle">Register users and view contacts quickly — mobile friendly.</p>
-		</div>
-	</header>
-
-	<main class="container grid">
-		<section class="card form-card">
-			<h2 id="formTitle">Add / Register User</h2>
-			<form id="userForm" class="form">
-				<input type="hidden" id="userId" value="">
-				<div class="row">
-					<label>Name</label>
-					<input id="name" placeholder="Full name" required />
-				</div>
-				<div class="row">
-					<label>Phone</label>
-					<input id="phone" placeholder="e.g. +1234567890" required />
-				</div>
-				<div class="row">
-					<label>Language</label>
-					<input id="language" placeholder="Preferred language" />
-				</div>
-				<div class="row">
-					<label>Location</label>
-					<input id="location" placeholder="City or address" />
-				</div>
-				<div class="actions">
-					<button class="btn primary" type="submit" id="submitBtn">Save User</button>
-					<button class="btn" type="button" id="resetBtn">Clear</button>
-				</div>
-			</form>
-			<div id="status" class="status" aria-live="polite"></div>
-		</section>
-
-		<section class="card list-card">
-			<div class="list-header">
-				<h2>Users</h2>
-				<div>
-					<input id="search" placeholder="Search name or phone" />
-					<button class="btn" id="refreshBtn">Refresh</button>
-				</div>
-			</div>
-			<div id="users" class="users"></div>
-		</section>
-	</main>
-
-	<footer class="site-footer">
-		<div class="container">© IVR System</div>
-	</footer>
-
-	<script src="app.js"></script>
+    <div id="root"></div>
+	<script type="text/babel" src="app.js"></script>
 </body>
 
 </html>
