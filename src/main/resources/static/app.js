@@ -320,6 +320,11 @@ function UserDashboard({ currentUser, showStatus }) {
                                 </div>
                             </div>
                             <div className="actions" style={{ flexDirection: 'column', gap: '5px' }}>
+                                <button className="btn primary" onClick={() => {
+                                    alert('We simulate IVR locally and deploy telephony using Twilio API');
+                                    let msg = new SpeechSynthesisUtterance("Hello, this is your smart health assistant. Please " + r.reason);
+                                    window.speechSynthesis.speak(msg);
+                                }}>Simulate Fallback Call</button>
                                 <button className="btn" onClick={() => handleEdit(r)}>Edit</button>
                                 <button className="btn danger" onClick={() => handleDelete(r.id)}>Delete</button>
                             </div>

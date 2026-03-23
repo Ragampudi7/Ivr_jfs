@@ -16,19 +16,23 @@ public class IVRCallService {
         TwilioConfig.init();
 
         try {
+            // Smart health assistant prompt
+            String message = "Hello, this is your smart health assistant. Please " + (reason != null ? reason : "complete your scheduled task");
+            
             // URL encode the reason
-            String encodedReason = URLEncoder.encode(reason != null ? reason : "your scheduled task", StandardCharsets.UTF_8.toString());
+            String encodedReason = URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
             
-            // Build the dynamic URL.
-            // NOTE: In a real production environment, 'http://localhost:8080' will not work for Twilio.
-            // You must use a public domain or ngrok! (e.g. URI.create("https://yourapp.com/api/twiml?reason=" + encodedReason);
-            // Twilio has an internal backup for 'demo.twilio.com' if local fails.
-            String dynamicUrl = "http://localhost:8080/api/twiml?reason=" + encodedReason;
-            System.out.println("Setting Twilio Webhook to: " + dynamicUrl);
+            // Build the dynamic URL using Render env var or fallback
+            String baseUrl = System.getenv("RENDER_EXTERNAL_URL");
+            if (baseUrl == null || baseUrl.isEmpty()) {
+                baseUrl = "http://demo.twilio.com/docs/voice.xml"; // Fallback for local Twilio testing so the call doesn't hard-crash
+                System.out.println("No RENDER_EXTERNAL_URL found, falling back for local testing.");
+            } else {
+                baseUrl = baseUrl + "/api/twiml?msg=" + encodedReason;
+                System.out.println("Using dynamic Render URL: " + baseUrl);
+            }
             
-            // Using a demo URL for the actual Twilio SDK call just to prevent crash without ngrok,
-            // but logging the dynamic URL to show implementation works.
-            URI twimlUrl = URI.create("http://demo.twilio.com/docs/voice.xml");
+            URI twimlUrl = URI.create(baseUrl);
 
             Call call = Call.creator(
                     new PhoneNumber(toNumber),
